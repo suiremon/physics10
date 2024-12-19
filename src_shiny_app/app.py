@@ -6,7 +6,7 @@ from shiny.express import input, render, ui
 ui.input_text("epsilon1", "Введите диэлектрическую проницаемость первой среды", value=1)
 ui.input_text("epsilon2", "Введите диэлектрическую проницаемость второй среды", value=2)
 ui.input_text("E1_magnitude", "Введите модуль напряженности", value=5)
-ui.input_text("D1_magnitude", "Введите модуль индукции", value = 5)
+ui.input_text("D1_magnitude", "Введите модуль индукции", value = 7)
 ui.input_text("alpha1", "Введите угол падения в градусах", value=30)
 with ui.card(full_screen=True):
     @render.plot
