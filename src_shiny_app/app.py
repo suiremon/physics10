@@ -6,6 +6,7 @@ from shiny.express import input, render, ui
 ui.input_text("epsilon1", "Введите диэлектрическую проницаемость первой среды", value=1)
 ui.input_text("epsilon2", "Введите диэлектрическую проницаемость второй среды", value=2)
 ui.input_text("E1_magnitude", "Введите модуль напряженности электрического поля в первой среде", value=5)
+ui.input_text("D1_magnitude", "", value = 5)
 ui.input_text("alpha1", "Введите угол падения в градусах", value=30)
 with ui.card(full_screen=True):
     @render.plot
@@ -14,14 +15,16 @@ with ui.card(full_screen=True):
         epsilon1 = input.epsilon1() # Диэлектрическая проницаемость первой среды
         epsilon2 =  input.epsilon2() # Диэлектрическая проницаемость второй среды
         E1_magnitude = input.E1_magnitude()  # Модуль напряженности электрического поля в первой среде
+        D1_magnitude = input.D1_magnitude()
         alpha1 = input.alpha1()  # Угол падения в градусах
         if (epsilon1 == "" or epsilon2 == "" or E1_magnitude == "" or alpha1 == ""):
             return
         epsilon1 = float(epsilon1)
         epsilon2 = float(epsilon2)
         E1_magnitude = float(E1_magnitude)
+        D1_magnitude = float(D1_magnitude)
         alpha1 = float(alpha1)
-        if (epsilon1 < 0 or epsilon2 < 0 or epsilon1 > 10000 or epsilon2 > 10000 or E1_magnitude < 0 or E1_magnitude > 10000 or alpha1 < -360 or alpha1 > 360):
+        if (epsilon1 < 0 or D1_magnitude < 0 or D1_magnitude > 10000 or epsilon2 < 0 or epsilon1 > 10000 or epsilon2 > 10000 or E1_magnitude < 0 or E1_magnitude > 10000 or alpha1 < -360 or alpha1 > 360):
             return
         epsilon1 = float(epsilon1)
         epsilon2 = float(epsilon2)
@@ -40,7 +43,6 @@ with ui.card(full_screen=True):
         E2_y = E2_magnitude * np.sin(alpha2_rad)
 
         # Граничные условия для D
-        D1_magnitude = epsilon1 * E1_magnitude
         D1_x = D1_magnitude * np.cos(alpha1_rad)
         D1_y = D1_magnitude * np.sin(alpha1_rad)
 
